@@ -42,10 +42,11 @@ class CardDeliveryTest {
     }
 
     @Test
-    void shouldSelectCitySuccessfully() {
+    void shouldSuccessfullySubmitFormWithDropdownCityAndDatePicker() {
         String cityName = "Калуга";
+        String planningDate = generateDate(7, "dd.MM.yyyy");
 
-        // Находим поле ввода и введем первые две буквы города
+        // Находим поле ввода и вводим первые две буквы города
         $("[data-test-id='city'] input").setValue(cityName.substring(0, 2));
 
         // проверяем, что список городов отобразился
@@ -58,11 +59,6 @@ class CardDeliveryTest {
 
         // Проверяем, что в поле ввода теперь стоит "Калуга"
         $("[data-test-id='city'] input").shouldHave(Condition.value(cityName));
-    }
-
-    @Test
-    void shouldSelectDateSuccessfully() {
-        String planningDate = generateDate(7, "dd.MM.yyyy");
 
         // Нажимаем на кнопку отображения виджета календаря
         $("[data-test-id='date'] button").click();
@@ -74,5 +70,13 @@ class CardDeliveryTest {
 
         // Проверяем, что в поле ввода теперь стоит дата на неделю вперёд от текущей даты
         $("[data-test-id='date'] input.input__control").shouldHave(Condition.value(planningDate));
+
+        $("[data-test-id='name'] input").setValue("Иван Иванов-Петров");
+        $("[data-test-id='phone'] input").setValue("+79001234567");
+        $("[data-test-id='agreement']").click();
+        $$("button").findBy(Condition.text("Забронировать")).click();
+        $("[data-test-id='notification'] .notification__content")
+                .shouldHave(Condition.text("Встреча успешно забронирована на " + planningDate), Duration.ofSeconds(15))
+                .shouldBe(Condition.visible);
     }
 }
