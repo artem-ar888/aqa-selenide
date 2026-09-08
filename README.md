@@ -1,4 +1,4 @@
-# Selenide [![Build status](https://ci.appveyor.com/api/projects/status/hjn48myt2rf6rn0o?svg=true)](https://ci.appveyor.com/project/artem-ar888/aqa-selenide)
+[![Java CI with Gradle](https://github.com/artem-ar888/aqa-selenide/actions/workflows/gradle.yml/badge.svg)](https://github.com/artem-ar888/aqa-selenide/actions/workflows/gradle.yml)
 
 # Домашнее задание к занятию «2.2. Selenide»
 
